@@ -63,6 +63,7 @@ PYVER = sys.version_info[:2]
 
 log = logging.getLogger(__name__)
 
+#20240314 line added to installer script by finchnSNPs to deal with ca.certificates error
 os.environ['SSL_CERT_FILE'] = '/etc/ssl/certs/ca-bundle.trust.crt'
 
 # this sometimes gets set to fslinstaller.pyc, so rstrip c
