@@ -21,6 +21,7 @@ From: centos:7.5.1804
     # libraries and commands for FSL
 
     yum -y update
+    # git added to install list KF
     yum -y install epel-release wget file bzip2 openblas-devel which libmng libpng12 libSM gtk2 mesa-dri-drivers git
 
     # install FSL with ca.certificates fix from github
