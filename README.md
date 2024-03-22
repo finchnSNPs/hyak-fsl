@@ -20,9 +20,43 @@ Created at the request of UW HYAK users in March 2024.
 
  ### Apptainer recipe file
 
-The apptainer recipe file `fsl-centos7.def` was from a template originally created by Tashrif Billah found in this [repo](https://github.com/pnlbwh/fsl-containers/tree/master) and the file named [Singularity.centos7](https://github.com/pnlbwh/fsl-containers/blob/master/Singularity.centos7).
+The `apptainer` recipe file `fsl-centos7.def` was from a template originally created by Tashrif Billah found in this [repo](https://github.com/pnlbwh/fsl-containers/tree/master) and the file named [Singularity.centos7](https://github.com/pnlbwh/fsl-containers/blob/master/Singularity.centos7).
 
-### SLURM script
+Build the `apptainer` container. On HYAK, load the `apptainer` module with `module load apptainer` from an [interactive job](https://hyak.uw.edu/docs/compute/scheduling-jobs#interactive-node-partitions).
+
+```shell terminal=true
+$ apptainer build fsl-centos7.sif fsl-centos7.def
+```
+
+Test the container.
+
+```shell terminal=true
+$ apptainer shell --bind /gscratch/ fsl-centos7.sif
+Apptainer> echo $FSLDIR
+/fsl-centos7
+
+Apptainer> fsl_sub
+usage: fsl_sub [-h] [-a ARCH] [-c COPROCESSOR]
+               [--coprocessor_multi COPROCESSOR_MULTI]
+               [--coprocessor_class COPROCESSOR_CLASS]
+               [--coprocessor_class_strict]
+               [--coprocessor_toolkit COPROCESSOR_TOOLKIT] [-F] [-j JOBHOLD]
+               [--not_requeueable] [--array_hold ARRAY_HOLD] [-l LOGDIR]
+               [-m MAILOPTIONS] [-M MAILTO] [-n] [-N NAME] [-p PRIORITY]
+               [-q QUEUE] [-r RESOURCE] [--delete_job DELETE_JOB]
+               [--extra EXTRA] [-R GB] [-s PARALLELENV,THREADS]
+               [-t ARRAY_TASK] [--array_native ARRAY_NATIVE] [-x NUMBER]
+               [--keep_jobscript] [--has_coprocessor COPROCESSOR_NAME]
+               [--has_queues] [--project PROJECT] [-S] [-T MINUTES]
+               [--show_config] [-v] [-V] [-z file]
+               ...
+fsl_sub: error: No command or array task file provided
+
+Apptainer> which python
+/fsl-centos7/bin/python
+```
+
+### SLURM scripts
 
 `SLURM` scripts provided for sending array and single jobs to HYAK.
 
